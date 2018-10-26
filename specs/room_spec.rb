@@ -13,6 +13,7 @@ class RoomTest < MiniTest::Test
     @room4 = Room.new(4, 12)
     @song4 = Song.new("Burning Love", "Elvis")
     @guest1 = Guest.new("Babs", "Smith")
+    @guest2 = Guest.new("Mandy", "Guiness")
   end
 
   def test_room_has_room_number
@@ -45,13 +46,33 @@ class RoomTest < MiniTest::Test
     assert_equal([], @room3.guests_in_room)
   end
 
-  # def test_check_guest_into_room
-  #   @room3.check_guest_into_room(@guest1)
-  #   assert_equal(1, @room3.guests_in_room)
-  # end
-
   def test_number_of_guests_in_room
     assert_equal(0, @room1.number_of_guests_in_room)
   end
+
+  def test_check_guest_into_room__1_guest
+    @room3.check_guest_into_room(@guest1)
+    assert_equal(1, @room3.number_of_guests_in_room)
+  end
+
+  def test_check_guest_into_room__2_guests
+    @room3.check_guest_into_room(@guest1)
+    @room3.check_guest_into_room(@guest2)
+    assert_equal(2, @room3.number_of_guests_in_room)
+  end
+
+  def test_chuck_guest_out_of_room__0_guests_left_after
+    @room3.check_guest_into_room(@guest1)
+    @room3.chuck_guest_out_of_room(@guest1)
+    assert_equal(0, @room3.number_of_guests_in_room)
+  end
+
+  def test_chuck_guest_out_of_room__1_guest_left_after
+    @room3.check_guest_into_room(@guest1)
+    @room3.check_guest_into_room(@guest2)
+    @room3.chuck_guest_out_of_room(@guest1)
+    assert_equal(1, @room3.number_of_guests_in_room)
+  end
+
 
 end

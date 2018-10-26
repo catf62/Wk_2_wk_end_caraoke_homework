@@ -18,11 +18,16 @@ class Room
     @room_play_list << song
   end
 
-  # def check_guest_into_room(guest)
-  #   @guests_in_room << guest
-  # end
-
   def number_of_guests_in_room
     @guests_in_room.count
   end
+
+  def check_guest_into_room(guest)
+    @guests_in_room << guest
+  end
+
+  def chuck_guest_out_of_room(guest)
+    @guests_in_room.delete(guest)
+  end
+
 end
