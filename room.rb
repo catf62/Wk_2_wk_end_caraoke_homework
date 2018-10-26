@@ -9,4 +9,12 @@ class Room
     @room_play_list = []
   end
 
+  def change_booking_name(new_name)
+    @room_booking_name = new_name
+  end
+
+  def add_song_to_playlist(song)
+    @room_play_list<<song
+  end
+
 end

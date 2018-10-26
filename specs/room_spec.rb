@@ -1,6 +1,7 @@
 require('minitest/autorun')
 require('minitest/rg')
 require_relative('../room')
+require_relative('../song')
 
 class RoomTest < MiniTest::Test
 
@@ -9,6 +10,7 @@ class RoomTest < MiniTest::Test
     @room2 = Room.new(2, 8)
     @room3 = Room.new(3, 8)
     @room4 = Room.new(4, 12)
+    @song1 = Song.new("Burning Love", "Elvis")
   end
 
   def test_room_has_room_number
@@ -25,6 +27,16 @@ class RoomTest < MiniTest::Test
 
   def test_room_play_list_starts_off_empty
     assert_equal([], @room1.room_play_list)
+  end
+
+  def test_change_booking_name
+    @room1.change_booking_name("Smith")
+    assert_equal("Smith", @room1.room_booking_name)
+  end
+
+  def test_add_song_to_playlist
+    @room3.add_song_to_playlist(@song1)
+    assert_equal([@song1], @room3.room_play_list)
   end
 
 end
